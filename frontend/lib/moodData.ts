@@ -1,3 +1,5 @@
+import { CustomMoodStorage } from './customMoods';
+
 export interface Mood {
   id: string;
   name: string;
@@ -2412,7 +2414,6 @@ export const MoodData = {
 
     // Then check custom moods
     if (typeof window !== "undefined") {
-      const { CustomMoodStorage } = require("./customMoods");
       const customMoods = CustomMoodStorage.getCustomMoods();
       return customMoods.find((mood: any) => mood.id === id) || null;
     }
@@ -2426,7 +2427,6 @@ export const MoodData = {
 
     // Get custom moods if in browser environment
     if (typeof window !== "undefined") {
-      const { CustomMoodStorage } = require("./customMoods");
       const customMoods = CustomMoodStorage.getCustomMoods();
       const allMoods = [...defaultMoods, ...customMoods];
 
@@ -2446,7 +2446,6 @@ export const MoodData = {
 
   getCustomMoods() {
     if (typeof window !== "undefined") {
-      const { CustomMoodStorage } = require("./customMoods");
       return CustomMoodStorage.getCustomMoods();
     }
     return [];
