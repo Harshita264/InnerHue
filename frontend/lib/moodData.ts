@@ -1,3 +1,4 @@
+import type { CustomMood, Mood as CustomMoodType } from './customMoods';
 import { CustomMoodStorage } from './customMoods';
 
 export interface Mood {
@@ -2415,7 +2416,7 @@ export const MoodData = {
     // Then check custom moods
     if (typeof window !== "undefined") {
       const customMoods = CustomMoodStorage.getCustomMoods();
-      return customMoods.find((mood: any) => mood.id === id) || null;
+      return customMoods.find((mood: CustomMood) => mood.id === id) || null;
     }
 
     return null;
@@ -2431,14 +2432,14 @@ export const MoodData = {
       const allMoods = [...defaultMoods, ...customMoods];
 
       // Add isCustom flag to distinguish between default and custom moods
-      return allMoods.map((mood: any) => ({
+      return allMoods.map((mood: CustomMood) => ({
         ...mood,
         isCustom: mood.hasOwnProperty("isCustom") ? mood.isCustom : false,
       }));
     }
 
     // Add isCustom: false to all default moods when on server
-    return defaultMoods.map((mood: any) => ({
+    return defaultMoods.map((mood: CustomMoodType) => ({
       ...mood,
       isCustom: false,
     }));
